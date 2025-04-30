@@ -2,9 +2,9 @@
 // versions:
 // 	protoc-gen-go v1.36.6
 // 	protoc        v5.29.3
-// source: pb/demo/demo.proto
+// source: pb/demoa/demoa.proto
 
-package pb
+package demoa
 
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
@@ -21,29 +21,26 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
-type RateDriverByOrderRequest struct {
+type GetDriverTagsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
-	OrderId       *uint64                `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3,oneof" json:"order_id,omitempty"`
-	BuyerId       *uint64                `protobuf:"varint,2,opt,name=buyer_id,json=buyerId,proto3,oneof" json:"buyer_id,omitempty"`
-	DriverId      *uint64                `protobuf:"varint,3,opt,name=driver_id,json=driverId,proto3,oneof" json:"driver_id,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RateDriverByOrderRequest) Reset() {
-	*x = RateDriverByOrderRequest{}
+func (x *GetDriverTagsRequest) Reset() {
+	*x = GetDriverTagsRequest{}
 	mi := &file_pb_demo_demo_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RateDriverByOrderRequest) String() string {
+func (x *GetDriverTagsRequest) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RateDriverByOrderRequest) ProtoMessage() {}
+func (*GetDriverTagsRequest) ProtoMessage() {}
 
-func (x *RateDriverByOrderRequest) ProtoReflect() protoreflect.Message {
+func (x *GetDriverTagsRequest) ProtoReflect() protoreflect.Message {
 	mi := &file_pb_demo_demo_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -55,53 +52,32 @@ func (x *RateDriverByOrderRequest) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RateDriverByOrderRequest.ProtoReflect.Descriptor instead.
-func (*RateDriverByOrderRequest) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDriverTagsRequest.ProtoReflect.Descriptor instead.
+func (*GetDriverTagsRequest) Descriptor() ([]byte, []int) {
 	return file_pb_demo_demo_proto_rawDescGZIP(), []int{0}
 }
 
-func (x *RateDriverByOrderRequest) GetOrderId() uint64 {
-	if x != nil && x.OrderId != nil {
-		return *x.OrderId
-	}
-	return 0
-}
-
-func (x *RateDriverByOrderRequest) GetBuyerId() uint64 {
-	if x != nil && x.BuyerId != nil {
-		return *x.BuyerId
-	}
-	return 0
-}
-
-func (x *RateDriverByOrderRequest) GetDriverId() uint64 {
-	if x != nil && x.DriverId != nil {
-		return *x.DriverId
-	}
-	return 0
-}
-
-type RateDriverByOrderResponse struct {
+type GetDriverTagsResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	DebugMsg      *string                `protobuf:"bytes,1,opt,name=debug_msg,json=debugMsg,proto3,oneof" json:"debug_msg,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *RateDriverByOrderResponse) Reset() {
-	*x = RateDriverByOrderResponse{}
+func (x *GetDriverTagsResponse) Reset() {
+	*x = GetDriverTagsResponse{}
 	mi := &file_pb_demo_demo_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *RateDriverByOrderResponse) String() string {
+func (x *GetDriverTagsResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RateDriverByOrderResponse) ProtoMessage() {}
+func (*GetDriverTagsResponse) ProtoMessage() {}
 
-func (x *RateDriverByOrderResponse) ProtoReflect() protoreflect.Message {
+func (x *GetDriverTagsResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_pb_demo_demo_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -113,12 +89,12 @@ func (x *RateDriverByOrderResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RateDriverByOrderResponse.ProtoReflect.Descriptor instead.
-func (*RateDriverByOrderResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use GetDriverTagsResponse.ProtoReflect.Descriptor instead.
+func (*GetDriverTagsResponse) Descriptor() ([]byte, []int) {
 	return file_pb_demo_demo_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *RateDriverByOrderResponse) GetDebugMsg() string {
+func (x *GetDriverTagsResponse) GetDebugMsg() string {
 	if x != nil && x.DebugMsg != nil {
 		return *x.DebugMsg
 	}
@@ -129,21 +105,14 @@ var File_pb_demo_demo_proto protoreflect.FileDescriptor
 
 const file_pb_demo_demo_proto_rawDesc = "" +
 	"\n" +
-	"\x12pb/demo/demo.proto\"\xa4\x01\n" +
-	"\x18RateDriverByOrderRequest\x12\x1e\n" +
-	"\border_id\x18\x01 \x01(\x04H\x00R\aorderId\x88\x01\x01\x12\x1e\n" +
-	"\bbuyer_id\x18\x02 \x01(\x04H\x01R\abuyerId\x88\x01\x01\x12 \n" +
-	"\tdriver_id\x18\x03 \x01(\x04H\x02R\bdriverId\x88\x01\x01B\v\n" +
-	"\t_order_idB\v\n" +
-	"\t_buyer_idB\f\n" +
-	"\n" +
-	"_driver_id\"K\n" +
-	"\x19RateDriverByOrderResponse\x12 \n" +
+	"\x12pb/demoa/demoa.proto\"\x16\n" +
+	"\x14GetDriverTagsRequest\"G\n" +
+	"\x15GetDriverTagsResponse\x12 \n" +
 	"\tdebug_msg\x18\x01 \x01(\tH\x00R\bdebugMsg\x88\x01\x01B\f\n" +
 	"\n" +
-	"_debug_msg2T\n" +
-	"\x04Demo\x12L\n" +
-	"\x11RateDriverByOrder\x12\x19.RateDriverByOrderRequest\x1a\x1a.RateDriverByOrderResponse\"\x00B\aZ\x05./;pbb\x06proto3"
+	"_debug_msg2H\n" +
+	"\x04Demo\x12@\n" +
+	"\rGetDriverTags\x12\x15.GetDriverTagsRequest\x1a\x16.GetDriverTagsResponse\"\x00B\tZ\a./;demob\x06proto3"
 
 var (
 	file_pb_demo_demo_proto_rawDescOnce sync.Once
@@ -159,12 +128,12 @@ func file_pb_demo_demo_proto_rawDescGZIP() []byte {
 
 var file_pb_demo_demo_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_pb_demo_demo_proto_goTypes = []any{
-	(*RateDriverByOrderRequest)(nil),  // 0: RateDriverByOrderRequest
-	(*RateDriverByOrderResponse)(nil), // 1: RateDriverByOrderResponse
+	(*GetDriverTagsRequest)(nil),  // 0: GetDriverTagsRequest
+	(*GetDriverTagsResponse)(nil), // 1: GetDriverTagsResponse
 }
 var file_pb_demo_demo_proto_depIdxs = []int32{
-	0, // 0: Demo.RateDriverByOrder:input_type -> RateDriverByOrderRequest
-	1, // 1: Demo.RateDriverByOrder:output_type -> RateDriverByOrderResponse
+	0, // 0: Demo.GetDriverTags:input_type -> GetDriverTagsRequest
+	1, // 1: Demo.GetDriverTags:output_type -> GetDriverTagsResponse
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -177,7 +146,6 @@ func file_pb_demo_demo_proto_init() {
 	if File_pb_demo_demo_proto != nil {
 		return
 	}
-	file_pb_demo_demo_proto_msgTypes[0].OneofWrappers = []any{}
 	file_pb_demo_demo_proto_msgTypes[1].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

@@ -33,9 +33,9 @@ func GinError(err error) ginerrors.Error {
 	return ginerrors.New(e.GetCode(), e.GetMsg())
 }
 
-func As(err error) *ErrNo {
+func As(err error) ginerrors.Error {
 	if err == nil {
-		return Ok
+		return ginerrors.Success
 	}
 
 	// 处理框架错误
@@ -47,11 +47,5 @@ func As(err error) *ErrNo {
 		}
 	}
 
-	return Unknown
+	return ginerrors.ErrorUnKnown
 }
-
-var (
-	// [0, 999] 通用
-	Ok      = &ErrNo{Code: 0, Msg: "success"}
-	Unknown = &ErrNo{Code: 1, Msg: "unknown"}
-)
