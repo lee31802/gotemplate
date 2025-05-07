@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+//pb是protoc 生成go文件的包名
+option go_package ="./;buy";
+
+service Buy {
+  rpc CreateOrder(CreateOrderRequest) returns (CreateOrderResponse);
+}
+
+message CreateOrderRequest {
+  optional int64 userId = 1;
+  optional int64 productId = 2;
+}
+message CreateOrderResponse {
+  optional string orderId = 1;
+}

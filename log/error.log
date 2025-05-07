@@ -1,0 +1,3 @@
+2025-05-07 18:07:47.332|ERROR|-|-|buy/request.go:17|CreateOrderRequest req ParamsInvalid|req={"user_id":0,"product_id":0}
+2025-05-07 18:07:47.335|ERROR|6ae0dd7dccc54ae48d27086f91fa22bb|735feebb82874e94adad610fbf6d0f76|gweb/router.go:281|Validate request failed|error=error: code = 100 desc = params invalid,req={"user_id":0,"product_id":0}
+2025-05-07 18:08:15.279|ERROR|125cad3f28704ded9d06cd5e443caca3|41bac87108d74010a62fe53e1c23e93f|buy/module.go:35|CreateOrder API|req={"user_id":1,"product_id":1},error=rpc error: code = Unimplemented desc = method CreateOrder not implemented

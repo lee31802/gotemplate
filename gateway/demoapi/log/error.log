@@ -1,0 +1,1 @@
+2025-05-07 22:48:15.361|ERROR|0515338ebc9f420095821aec688b6426|d131a5f0d3484b0bb6352064d01dfa92|buy/module.go:35|CreateOrder API|req={"user_id":1,"product_id":1},error=rpc error: code = Unavailable desc = last connection error: connection error: desc = \"transport: Error while dialing: dial tcp 192.168.1.20:8081: connect: connection refused\"

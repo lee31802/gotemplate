@@ -1,9 +1,10 @@
 package main
 
 import (
-	microkit "github.com/lee31802/comment_lib/gmicrokit"
+	"flag"
 	"github.com/lee31802/comment_lib/gweb"
 	"github.com/lee31802/comment_lib/logkit"
+	"github.com/lee31802/gotemplate/gateway/demoapi/buy"
 	"github.com/lee31802/gotemplate/gateway/demoapi/ping"
 )
 
@@ -14,7 +15,7 @@ var (
 			router.GET("/", func() string { return "OK" })
 			return nil
 		},
-		Modules: []gweb.Module{&ping.PingModule{}},
+		Modules: []gweb.Module{&ping.PingModule{}, buy.NewDemoModule()},
 	}
 )
 
@@ -33,6 +34,8 @@ func InitLogkit() {
 
 func main() {
 	InitLogkit()
-	microkit.Init()
+	var appPath = flag.String("appPath", "", "Application path")
+	//var configFile = flag.String("config", "conf/config.yml", "config file")
+	cmd.AppPath = *appPath
 	cmd.Execute()
 }

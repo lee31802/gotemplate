@@ -1,23 +1,17 @@
 package client
 
 import (
-	"github.com/lee31802/gotemplate/pb/demoa"
+	"github.com/lee31802/comment_lib/gzero/client"
+	"github.com/lee31802/gotemplate/pb/buy"
 )
 
 var (
-	demoAClient demoa.DemoClient
+	demoAClient buy.Client
 )
 
-func DemoAClient() demoa.DemoClient {
+func DemoAClient() buy.Client {
 	if demoAClient == nil {
-		initDemoAClient()
+		demoAClient = buy.NewClient(client.InitClient())
 	}
 	return demoAClient
-}
-
-func initDemoAClient() {
-	cli := demoa.NewClient()
-
-	demoAClient = cli
-
 }

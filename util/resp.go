@@ -1,7 +1,7 @@
 package util
 
 import (
-	"github.com/lee31802/comment_lib/ginerrors"
+	"github.com/lee31802/comment_lib/gerrors"
 	"github.com/lee31802/comment_lib/gweb"
 	"github.com/lee31802/gotemplate/errno"
 	"net/http"
@@ -16,7 +16,7 @@ func ErrTranferWithResponse(err error) gweb.Response {
 	return WithError(err)
 }
 
-func WithCodeResp(resp interface{}, err ginerrors.Error) gweb.Response {
+func WithCodeResp(resp interface{}, err gerrors.Error) gweb.Response {
 	return gweb.JSONResponse(http.StatusOK, err, resp)
 }
 
@@ -25,5 +25,5 @@ func WithError(err error) gweb.Response {
 }
 
 func WithSuccess(resp interface{}) gweb.Response {
-	return gweb.JSONResponse(http.StatusOK, ginerrors.Success, resp)
+	return gweb.JSONResponse(http.StatusOK, gerrors.Success, resp)
 }

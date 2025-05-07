@@ -1,0 +1,16 @@
+ginweb:
+  recovery: true
+  pprof: true
+  jaeger:
+    enable: true
+    sampling_rate: 0.01
+
+log:
+  level: info
+  path: ./log
+  max_size: 1024       # megabytes
+  max_backups: 30
+  max_age: 3          # days
+  enable_caller: true
+  enable_console: false
+  error_aysnc: false
