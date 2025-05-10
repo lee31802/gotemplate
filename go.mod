@@ -3,7 +3,9 @@ module github.com/lee31802/gotemplate
 go 1.24.2
 
 require (
+	github.com/google/wire v0.6.0
 	github.com/lee31802/comment_lib v1.0.1
+	github.com/zeromicro/go-zero v1.8.2
 	google.golang.org/grpc v1.72.0
 	google.golang.org/protobuf v1.36.6
 )
@@ -73,7 +75,6 @@ require (
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
-	github.com/zeromicro/go-zero v1.8.2 // indirect
 	go.etcd.io/etcd/api/v3 v3.5.15 // indirect
 	go.etcd.io/etcd/client/pkg/v3 v3.5.15 // indirect
 	go.etcd.io/etcd/client/v3 v3.5.15 // indirect

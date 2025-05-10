@@ -1,101 +1,69 @@
 package config
 
 import (
-	"sync"
+	"github.com/lee31802/comment_lib/gzero/server"
 )
 
-type ConsumerConfig struct {
-	Brokers string   `yaml:"brokers" mapstructure:"brokers"`
-	Topics  []string `yaml:"topics" mapstructure:"topics"`
-	Group   string   `yaml:"group" mapstructure:"group"`
-	Version string   `yaml:"version" mapstructure:"version"`
+var Cfg *Config
+
+// Config 整合所有配置部分
+type Config struct {
+	Log    LogConfig `mapstructure:"log"`
+	Server BuyConfig `mapstructure:"server"`
 }
 
-type JobProducerConfig struct {
-	Brokers string `yaml:"brokers" mapstructure:"brokers"`
-	Topic   string `yaml:"topic" mapstructure:"topic"`
-	Version string `yaml:"version" mapstructure:"version"`
+// EtcdConfig 对应配置中的 buy.Etcd 部分
+type EtcdConfig struct {
+	Hosts              []string
+	Key                string
+	ID                 int64  `json:",optional"`
+	User               string `json:",optional"`
+	Pass               string `json:",optional"`
+	CertFile           string `json:",optional"`
+	CertKeyFile        string `json:",optional=CertFile"`
+	CACertFile         string `json:",optional=CertFile"`
+	InsecureSkipVerify bool   `json:",optional"`
 }
 
-type EventProducerConfig struct {
-	Brokers string `yaml:"brokers" mapstructure:"brokers"`
-	Topic   string `yaml:"topic" mapstructure:"topic"`
-	Version string `yaml:"version" mapstructure:"version"`
+type ServerMiddlewaresConf struct {
+	Trace      bool `json:",default=true"`
+	Recover    bool `json:",default=true"`
+	Stat       bool `json:",default=true"`
+	Prometheus bool `json:",default=true"`
+	Breaker    bool `json:",default=true"`
 }
 
-type Kafka struct {
-	RatingConsumer ConsumerConfig      `yaml:"rating_consumer"`
-	JobProducer    JobProducerConfig   `yaml:"rating_producer"`
-	EventProducer  EventProducerConfig `yaml:"event_producer"`
+// BuyConfig 对应配置中的 buy 部分
+type BuyConfig struct {
+	ServiceConf struct {
+		Name string
+	}
+	ListenOn      string
+	Etcd          EtcdConfig `json:",optional,inherit"`
+	Auth          bool       `json:",optional"`
+	StrictControl bool       `json:",optional"`
+	// setting 0 means no timeout
+	Timeout      int64 `json:",default=2000"`
+	CpuThreshold int64 `json:",default=900,range=[0:1000]"`
+	// grpc health check switch
+	Health      bool `json:",default=true"`
+	Middlewares ServerMiddlewaresConf
 }
 
-type RefreshUnreadStoreRatingConfig struct {
-	ChannelBufferSize uint32 `yaml:"channel_buffer_size"`
-	ConsumerNum       uint32 `yaml:"consumer_num"`
-	Timeout           uint64 `yaml:"timeout"`
+// LogConfig 对应配置中的 log 部分
+type LogConfig struct {
+	Level         string
+	Path          string
+	MaxSize       int
+	MaxBackups    int
+	BufferSize    int
+	ChannelSize   int
+	MaxAge        int
+	EnableCaller  bool
+	EnableConsole bool
+	ErrorAsync    bool
 }
 
-type RatingConfig struct {
-	once sync.Once
+func InitCfg() error {
+	return server.Config.Unmarshal(&Cfg)
 }
-
-//func (h *RatingConfig) Scan(configFile string) (err error) {
-//	h.once.Do(func() {
-//
-//		goconfig.Load(file.NewSource(
-//			file.WithPath(configFile),
-//		))
-//
-//		conf := goconfig.DefaultConfig
-//		err = h.BaseConfig.Scan(conf)
-//		if err != nil {
-//			logkit.Error("scan config error ", logkit.String("configFile", configFile), logkit.Err(err))
-//			return
-//		}
-//
-//		//Read Values From Config if need
-//		var serverName string
-//		{
-//			serverName = conf.Get("server.name").String("foody-ratingsvr")
-//
-//		}
-//		h.Load(configFile)
-//
-//		// watch change in config file
-//		go h.watch()
-//		logkit.Info("Scan config finished ", logkit.String("serverName", serverName))
-//	})
-//	return
-//}
-//
-//func (h *RatingConfig) watch() {
-//	//w, err := goconfig.Watch("log")
-//	//if err != nil {
-//	//	// do something
-//	//	logkit.Warn("watch config failed ", logkit.Err(err))
-//	//}
-//	//for {
-//	//	// wait for next value
-//	//	_, err := w.Next()
-//	//
-//	//	if err != nil {
-//	//		logkit.Warn("next config failed ", logkit.Err(err))
-//	//		continue
-//	//	}
-//	//}
-//}
-//
-//func (h *RatingConfig) Load(configFile string) error {
-//	data, err := ioutil.ReadFile(configFile)
-//	if err != nil {
-//		logkit.Error("Read config error", logkit.String("filename", configFile), logkit.Err(err))
-//		return err
-//	}
-//
-//	err = yaml.Unmarshal(data, h)
-//	if err != nil {
-//		logkit.Error("Unmarshl config error", logkit.String("filename", configFile), logkit.Err(err))
-//		return err
-//	}
-//	return nil
-//}

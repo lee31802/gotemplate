@@ -10,23 +10,23 @@ import (
 	"google.golang.org/protobuf/proto"
 )
 
-type DemoModule struct {
+type BuyModule struct {
 	client buy.Client
 }
 
-func NewDemoModule() *DemoModule {
-	return &DemoModule{}
+func NewDemoModule() *BuyModule {
+	return &BuyModule{}
 }
 
-func (m *DemoModule) Init(r gweb.Router) {
-	m.client = client.DemoAClient()
+func (m *BuyModule) Init(r gweb.Router) {
+	m.client = client.BuyClient()
 	group := r.Group("api/buyer/order")
 	{
 		group.POST("/create", m.CreateOrder)
 	}
 }
 
-func (m *DemoModule) CreateOrder(ctx context.Context, req *CreateOrderRequest) gweb.Response {
+func (m *BuyModule) CreateOrder(ctx context.Context, req *CreateOrderRequest) gweb.Response {
 	rsp, err := m.client.CreateOrder(ctx, &buy.CreateOrderRequest{
 		UserId:    proto.Int64(req.UserId),
 		ProductId: proto.Int64(req.ProductId),

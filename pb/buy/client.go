@@ -15,9 +15,14 @@ type BuyService struct {
 	cli  zrpc.Client
 }
 
+func GetServiceName() string {
+	return "buy"
+}
+
 func NewClient(cli zrpc.Client) Client {
 	return &BuyService{
-		cli: cli,
+		name: GetServiceName(),
+		cli:  cli,
 	}
 }
 

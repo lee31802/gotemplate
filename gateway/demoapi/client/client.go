@@ -6,12 +6,16 @@ import (
 )
 
 var (
-	demoAClient buy.Client
+	buyClient buy.Client
 )
 
-func DemoAClient() buy.Client {
-	if demoAClient == nil {
-		demoAClient = buy.NewClient(client.InitClient())
+func InitClient() {
+	BuyClient()
+}
+
+func BuyClient() buy.Client {
+	if buyClient == nil {
+		buyClient = buy.NewClient(client.InitClient(client.WithServiceName(buy.GetServiceName())))
 	}
-	return demoAClient
+	return buyClient
 }
